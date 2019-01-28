@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- JDBC 연결 처리 DataSource 설정 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" 
+			/> -->
+		<!-- <property name="url" value="jdbc:mysql://localhost:3306/test_web?useSSL=false&amp;serverTimezone=UTC" 
+			/> -->
+		<!-- log4jdbc 사용 위한 드라이버 클래스 및 URL -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url"
+			value="jdbc:log4jdbc:mysql://localhost:3306/test_web?useSSL=false&amp;serverTimezone=UTC" />
+		<property name="username" value="testweb" />
+		<property name="password" value="shdk2040" />
+	</bean>
+
+	<!-- DB 연결, SQL 실행 객체 설정 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 스프링 동작시 mybatis 설정 파일이 동작하도록 설정 -->
+		<property name="configLocation"
+			value="classpath:/mybatis-config.xml" />
+		<!-- XML 매퍼 파일 인식 설정 -->
+		<property name="mapperLocations"
+			value="classpath:mappers/**/*.xml" />
+	</bean>
+
+	<!-- SqlSessionTemplate 은 기본적인 트랜잭션 관리, 쓰레드 처리의 안정성 보장, DB연결과 종료 기능 -->
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
+	</bean>
+	
+	<context:component-scan base-package="com.rohboard.persistence" />
+	<context:component-scan base-package="com.rohboard.service" />
 </beans>
