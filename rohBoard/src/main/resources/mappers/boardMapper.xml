@@ -85,6 +85,55 @@
 		bno = #{bno}
 	</update>
 	
+	<select id="listPage" resultType="BoardVO">
+	SELECT
+		bno,
+		category,
+		title,
+		content,
+		writer,
+		secret,
+		regdate,
+		upddate,
+		viewcnt,
+		likecnt
+	  FROM
+	  	t_board
+	 WHERE
+	 	bno > 0
+	 ORDER BY bno DESC, regdate DESC
+	 LIMIT #{page}, 10
+	</select>
+	
+	<select id="listCriteria" parameterType="Criteria" resultType="BoardVO">
+	SELECT
+		bno,
+		category,
+		title,
+		content,
+		writer,
+		secret,
+		regdate,
+		upddate,
+		viewcnt,
+		likecnt
+	  FROM
+	  	t_board
+	 WHERE
+	 	bno > 0
+	 ORDER BY bno DESC, regdate DESC
+	 LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="countPaging" resultType="int">
+	SELECT
+		COUNT(1)
+	  FROM
+	  	t_board
+	 WHERE
+	 	bno > 0
+	</select>
+	
 	<select id="getNow" resultType="String">
 	select now()
 	</select>

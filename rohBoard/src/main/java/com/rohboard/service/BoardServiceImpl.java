@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.rohboard.domain.BoardVO;
+import com.rohboard.domain.Criteria;
 import com.rohboard.persistence.BoardDAO;
 
 @Service
@@ -40,9 +41,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void remove(Integer bno) throws Exception {
+	public int remove(Integer bno) throws Exception {
 		logger.info("called remove()");
-		dao.delete(bno);
+		
+		return dao.delete(bno);
 	}
 
 	@Override
@@ -55,6 +57,23 @@ public class BoardServiceImpl implements BoardService {
 	public void upLikeCnt(Integer bno) throws Exception {
 		logger.info("called upLike()");
 		dao.updateLikeCnt(bno);
+	}
+
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		logger.info("called listPage()");
+		return dao.listPage(page);
+	}
+
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+		logger.info("called listCri()");
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) throws Exception {
+		return dao.countPaging(cri);
 	}
 
 }

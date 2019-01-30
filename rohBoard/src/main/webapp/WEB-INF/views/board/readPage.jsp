@@ -13,18 +13,21 @@
 		console.log(formObj);
 		
 		$(".btn-warning").on("click", function(){
-			formObj.attr("action", "/board/modify");
+			formObj.attr("action", "/board/modifyPage");
 			formObj.attr("method", "get");
 			formObj.submit();
 		});
 		
 		$(".btn-danger").on("click", function(){
-			formObj.attr("action", "/board/remove");
+			formObj.attr("action", "/board/removePage");
 			formObj.submit();
 		});
 		
 		$(".btn-primary").on("click", function(){
-			self.location = "/board/listAll";
+			// self.location = "/board/listPage";
+			formObj.attr("action", "/board/listPage");
+			formObj.attr("method", "get");
+			formObj.submit();
 		});
 		
 		// 추천하기 기능
@@ -50,6 +53,8 @@
 				<!-- insert point!! -->
 				<form role="form" method="post">
 				
+					<input type="hidden" name="page" value="${cri.page }">
+					<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
 					<input type="hidden" name="bno" value="${boardVO.bno }">
 					
 				</form>
