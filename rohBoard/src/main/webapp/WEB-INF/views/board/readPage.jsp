@@ -13,7 +13,7 @@
 		console.log(formObj);
 		
 		$(".btn-warning").on("click", function(){
-			formObj.attr("action", "/board/modifyPage");
+			formObj.attr("action", "modifyPage");
 			formObj.attr("method", "get");
 			formObj.submit();
 		});
@@ -25,8 +25,11 @@
 		
 		$(".btn-primary").on("click", function(){
 			// self.location = "/board/listPage";
+			
 			formObj.attr("action", "/board/listPage");
 			formObj.attr("method", "get");
+			// 목록보기 시 글 번호 필요없음
+			$("input[name='bno']").attr("disabled",true);
 			formObj.submit();
 		});
 		

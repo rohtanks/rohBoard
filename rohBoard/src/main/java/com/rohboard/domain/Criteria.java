@@ -34,10 +34,14 @@ public class Criteria {
 	}
 	
 	// method for MyBatis SQL Mapper
+	// limit 구문의 시작 위치
+	// 시작 데이터 번호 = (페이지 번호 - 1) * 페이지 당 보여지는 갯수
 	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+		return (page - 1) * perPageNum;
 	}
 	
+	// method for MyBatis SQL Mapper
+	// limit 구문의 보여지는 갯수
 	public int getPerPageNum() {
 		return perPageNum;
 	}

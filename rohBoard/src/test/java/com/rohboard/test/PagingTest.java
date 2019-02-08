@@ -23,8 +23,8 @@ public class PagingTest {
 	public void testPaging() throws Exception {
 		
 		Criteria cri = new Criteria();
-		cri.setPage(500);
-		cri.setPerPageNum(99);
+		cri.setPage(3);
+		cri.setPerPageNum(15);
 		
 		PageMaker pn = new PageMaker();
 		pn.setCri(cri);

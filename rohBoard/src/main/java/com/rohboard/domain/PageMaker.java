@@ -93,6 +93,7 @@ public class PageMaker {
 	}
 	
 	public String makeQuery(int page) {
+		// path나 query에 해당하는 문자열을 추가해서 원하는 URI를 생성할 때 사용
 		UriComponents uriComponents =
 				UriComponentsBuilder.newInstance()
 				.queryParam("page", page)

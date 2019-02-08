@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -94,6 +93,7 @@ public class BoardController {
 			@ModelAttribute("cri") Criteria cri,
 			Model model) throws Exception {
 		logger.info("called readPage");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		model.addAttribute(service.read(bno));
 	}
@@ -110,6 +110,7 @@ public class BoardController {
 			@ModelAttribute("cri") Criteria cri,
 			Model model) throws Exception {
 		logger.info("called modifyPage get");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		model.addAttribute(service.read(bno));
 	}
@@ -131,6 +132,7 @@ public class BoardController {
 			Criteria cri,
 			RedirectAttributes rttr) throws Exception {
 		logger.info("called modifyPage post");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		service.modify(board);
 		
@@ -158,6 +160,7 @@ public class BoardController {
 			Criteria cri,
 			RedirectAttributes rttr) throws Exception {
 		logger.info("called removePage");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		int removeRst = service.remove(bno);
 		
@@ -171,19 +174,25 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "like", method = RequestMethod.POST)
-	public String like(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
+	public String like(@RequestParam("bno") int bno,
+			Criteria cri,
+			RedirectAttributes rttr) throws Exception {
 		logger.info("called like");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		service.upLikeCnt(bno);
 		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("bno", bno);
 		
-		return "redirect:/board/read";
+		return "redirect:/board/readPage";
 	}
 	
 	@RequestMapping(value = "listCri", method = RequestMethod.GET)
 	public void listCri(Criteria cri, Model model) throws Exception {
 		logger.info("called listPage with Criteria");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		model.addAttribute("list", service.listCriteria(cri));
 	}
@@ -191,7 +200,7 @@ public class BoardController {
 	@RequestMapping(value = "listPage", method = RequestMethod.GET)
 	public void listPage(Criteria cri, Model model) throws Exception {
 		logger.info("called listPage with Criteria");
-		logger.info(cri.toString());
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		model.addAttribute("list", service.listCriteria(cri));
 		PageMaker pageMaker = new PageMaker();
@@ -206,6 +215,7 @@ public class BoardController {
 	@RequestMapping(value = "listPage2", method = RequestMethod.GET)
 	public String listPageScript(Criteria cri, Model model) throws Exception {
 		logger.info("called listPage for javaScript testing");
+		logger.info("### 페이지 정보: " + cri.toString());
 		
 		model.addAttribute("list", service.listCriteria(cri));
 		

@@ -19,7 +19,8 @@ public interface BoardService {
 
 	public void upLikeCnt(Integer bno) throws Exception;
 
-	public List<BoardVO> listPage(int page) throws Exception;
+	// 미사용
+	// public List<BoardVO> listPage(int page) throws Exception;
 
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 

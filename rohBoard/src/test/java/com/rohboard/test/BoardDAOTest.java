@@ -55,19 +55,20 @@ public class BoardDAOTest {
 		System.out.println(dao.listAll().toString());
 	}
 	
-	// 페이징 처리 SQL 테스트
 	@Test
 	public void testListPage() throws Exception {
-		int page = 105;
-		
-		System.out.println(dao.listPage(page));
+		System.out.println(dao.listPage(1));
 	}
 	
+	// 페이징 처리 SQL 테스트
 	@Test
 	public void testListCrieria() throws Exception {
 		
 		Criteria cri = new Criteria();
+		cri.setPage(2);
 		cri.setPerPageNum(30);
+		
+		System.out.println(cri.toString());
 		
 		dao.listCriteria(cri);
 	}

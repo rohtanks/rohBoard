@@ -59,15 +59,15 @@ public class BoardServiceImpl implements BoardService {
 		dao.updateLikeCnt(bno);
 	}
 
-	@Override
-	public List<BoardVO> listPage(int page) throws Exception {
-		logger.info("called listPage()");
-		return dao.listPage(page);
-	}
+//	@Override
+//	public List<BoardVO> listPage(int page) throws Exception {
+//		logger.info("called listPage()");
+//		return dao.listPage(page);
+//	}
 
 	@Override
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
-		logger.info("called listCri()");
+		logger.info("called listCriteria()");
 		return dao.listCriteria(cri);
 	}
 
