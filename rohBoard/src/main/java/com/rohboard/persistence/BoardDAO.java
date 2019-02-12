@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rohboard.domain.BoardVO;
 import com.rohboard.domain.Criteria;
+import com.rohboard.domain.SearchCriteria;
 
 public interface BoardDAO {
 
@@ -24,4 +25,8 @@ public interface BoardDAO {
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 	
 	public int countPaging(Criteria cri) throws Exception;
+	
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri) throws Exception;
 }

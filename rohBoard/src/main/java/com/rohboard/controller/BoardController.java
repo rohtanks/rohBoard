@@ -111,7 +111,7 @@ public class BoardController {
 			Model model) throws Exception {
 		logger.info("called modifyPage get");
 		logger.info("### 페이지 정보: " + cri.toString());
-		
+
 		model.addAttribute(service.read(bno));
 	}
 	

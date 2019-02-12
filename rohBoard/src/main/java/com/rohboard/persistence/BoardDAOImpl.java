@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rohboard.domain.BoardVO;
 import com.rohboard.domain.Criteria;
+import com.rohboard.domain.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -69,6 +70,16 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		return session.selectOne(namespace + "countPaging", cri);
+	}
+
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace + "listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace + "listSearchCount", cri);
 	}
 
 }

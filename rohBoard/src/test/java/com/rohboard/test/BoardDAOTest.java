@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.rohboard.domain.BoardVO;
 import com.rohboard.domain.Criteria;
+import com.rohboard.domain.SearchCriteria;
 import com.rohboard.persistence.BoardDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -97,5 +98,17 @@ public class BoardDAOTest {
 				.encode();
 		
 		System.out.println(uriComponents.toString());
+	}
+	
+	@Test
+	public void testDynamic1() throws Exception {
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPage(1);
+		cri.setSearchType("c");
+		cri.setKeyword("테스트");
+		
+		System.out.println(dao.listSearch(cri));
+		System.out.println("============================");
+		System.out.println(dao.listSearchCount(cri));
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.rohboard.domain.BoardVO;
 import com.rohboard.domain.Criteria;
+import com.rohboard.domain.SearchCriteria;
 import com.rohboard.persistence.BoardDAO;
 
 @Service
@@ -74,6 +75,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int listCountCriteria(Criteria cri) throws Exception {
 		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<BoardVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return dao.listSearchCount(cri);
 	}
 
 }

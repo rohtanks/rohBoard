@@ -7,8 +7,8 @@ public class Criteria {
 	private int perPageNum;
 	
 	public Criteria() {
-		this.page = 1;
-		this.perPageNum = 10;
+		page = 1;
+		perPageNum = 10;
 	}
 
 	public void setPage(int page) {
